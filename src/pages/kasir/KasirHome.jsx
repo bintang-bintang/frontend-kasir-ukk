@@ -2,12 +2,12 @@ import React from "react";
 import { CiSearch } from "react-icons/ci";
 import Divider from "../../components/Divider";
 
-const AdminHome = () => {
+const KasirHome = () => {
     return (
         <>
             <div className="w-auto flex justify-between">
                 <h1 className="font-bold text-2xl">
-                    Welcome to, WikusamaCafe👋 <br/> Admin
+                    Welcome to, WikusamaCafe👋 <br /> Kasir
                 </h1>
                 <div className="relative flex items-center">
                     <span className="absolute left-2">
@@ -25,4 +25,4 @@ const AdminHome = () => {
     );
 };
 
-export default AdminHome;
+export default KasirHome;

@@ -1,0 +1,92 @@
+export const dataHistory = [
+    {
+        id: 1,
+        tanggal: "12/10/2023",
+        nama_customer: "Clim",
+        total_harga: "$9.50",
+    },
+    {
+        id: 2,
+        tanggal: "5/12/2024",
+        nama_customer: "Pincus",
+        total_harga: "$3.34",
+    },
+    {
+        id: 3,
+        tanggal: "7/9/2024",
+        nama_customer: "Raddie",
+        total_harga: "$8.15",
+    },
+    {
+        id: 4,
+        tanggal: "12/4/2023",
+        nama_customer: "Calv",
+        total_harga: "$6.47",
+    },
+    {
+        id: 5,
+        tanggal: "3/10/2024",
+        nama_customer: "Benedetto",
+        total_harga: "$5.35",
+    },
+    {
+        id: 6,
+        tanggal: "8/30/2024",
+        nama_customer: "Seward",
+        total_harga: "$6.75",
+    },
+    {
+        id: 7,
+        tanggal: "6/29/2024",
+        nama_customer: "Chance",
+        total_harga: "$5.96",
+    },
+    {
+        id: 8,
+        tanggal: "8/13/2024",
+        nama_customer: "Edlin",
+        total_harga: "$6.48",
+    },
+    {
+        id: 9,
+        tanggal: "7/4/2024",
+        nama_customer: "Virgil",
+        total_harga: "$4.01",
+    },
+    {
+        id: 10,
+        tanggal: "7/31/2024",
+        nama_customer: "Temple",
+        total_harga: "$8.78",
+    },
+    {
+        id: 11,
+        tanggal: "11/21/2023",
+        nama_customer: "Henrik",
+        total_harga: "$2.45",
+    },
+    {
+        id: 12,
+        tanggal: "12/8/2023",
+        nama_customer: "Augustus",
+        total_harga: "$1.14",
+    },
+    {
+        id: 13,
+        tanggal: "9/3/2024",
+        nama_customer: "Oren",
+        total_harga: "$2.11",
+    },
+    {
+        id: 14,
+        tanggal: "10/31/2023",
+        nama_customer: "Killy",
+        total_harga: "$8.03",
+    },
+    {
+        id: 15,
+        tanggal: "1/23/2024",
+        nama_customer: "Damon",
+        total_harga: "$1.82",
+    },
+];
