@@ -6,6 +6,7 @@ import SidebarKasir from "../../components/KasirComponents/SidebarKasir";
 import KasirOrder from "./KasirOrder";
 import KasirHistory from "./KasirHistory";
 import KasirHome from "./KasirHome";
+import KasirCart from "./KasirCart";
 
 const KasirApp = () => {
     return (
@@ -16,6 +17,7 @@ const KasirApp = () => {
                     <Routes>
                         <Route path="/" element={<KasirHome />} />
                         <Route path="/orders" element={<KasirOrder />} />
+                        <Route path="orders/cart/:id" element={<KasirCart />} />
                         <Route path="/history" element={<KasirHistory />} />
                     </Routes>
                 </SidebarKasir>

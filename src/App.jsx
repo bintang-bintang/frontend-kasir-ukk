@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import Login from './pages/Login'
 import Nopage from "./pages/Nopage";
 import ProtectedRoute from "./pages/ProtectedRoute";
 
@@ -15,11 +14,26 @@ const App = () => {
                 <Route path="/login" element={<Authentication />} />
 
                 {/* Rute jika role admin */}
-                <Route path="/admin/*" element={<AdminApp />} />
-                {/* Rute jika role kasir */}
-                <Route path="/kasir/*" element={<KasirApp />} />
+                <Route
+                    path="/admin/*"
+                    element={
+                        <ProtectedRoute allowedRoles={['admin']}>
+                            <AdminApp />
+                        </ProtectedRoute>
+                    }
+                />
 
-                <Route path="*" element={<Nopage />} />
+                {/* Rute jika role kasir */}
+                <Route
+                    path="/kasir/*"
+                    element={
+                        <ProtectedRoute allowedRoles={['kasir']}>
+                            <KasirApp />
+                        </ProtectedRoute>
+                    }
+                />
+
+                {/* <Route path="*" element={<Nopage />} /> */}
             </Routes>
         </BrowserRouter>
     );

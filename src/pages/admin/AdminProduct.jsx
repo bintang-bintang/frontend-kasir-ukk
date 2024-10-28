@@ -1,13 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import CardProduct from "../../components/CardProduct";
 import { dataProduct } from "../../assets/dataProduct";
+import { useGetMenus } from "../../api/MenuAPI";
+import ModalAddMenu from "../../components/AdminComponents/modal/ModalAddMenu";
+import ModalPreviewMenu from "../../components/AdminComponents/modal/ModalPreviewMenu";
 
 const AdminProduct = () => {
+    const { data, error, isLoading } = useGetMenus();
     const [select, setSelect] = useState("All");
     const [search, setSearch] = useState("");
-
     const menuTypes = ["All", "Food", "Drink"]; // Types of menu
+
+    // =================Add modal=================
+    const [statusAdd, setStatusAdd] = useState(false);
+    const handleAddModal = () => {
+        setStatusAdd(!statusAdd);
+    };
+    // =================Add modal=================
+    // =================Previe modal=================
+    const [statusPreview, setStatusPreview] = useState(false);
+    const [selectedMenu, setSelectedMenu] = useState(null);
+    const handlePreviewModal = () => {
+        setStatusPreview(!statusPreview);
+    };
+    // =================Previe modal=================
 
     const renderButton = (label) => (
         <input
@@ -22,15 +39,35 @@ const AdminProduct = () => {
         />
     );
 
-
     const dataFilter = dataProduct.filter((e) => {
-        const filterSearch = e.nama_menu.toLowerCase().includes(search.toLowerCase())
-        const filterSelect = select === "All" || e.jenis_menu.toLowerCase().includes(select.toLowerCase())
-        return filterSearch && filterSelect
+        const filterSearch = e.nama_menu
+            .toLowerCase()
+            .includes(search.toLowerCase());
+        const filterSelect =
+            select === "All" ||
+            e.jenis_menu.toLowerCase().includes(select.toLowerCase());
+        return filterSearch && filterSelect;
     });
 
+    if (isLoading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error.message}</p>;
+    console.log(data);
+
+   
     return (
         <div className="w-[60em] p-4 flex flex-col gap-1">
+            {/* Modals */}
+            {statusAdd && (
+                <ModalAddMenu click={handleAddModal} status={statusAdd} />
+            )}
+            {statusPreview && (
+                <ModalPreviewMenu
+                    click={handlePreviewModal}
+                    status={statusPreview}
+                    selectedMenu={selectedMenu}
+                />
+            )}
+            {/* Modals */}
             <nav className="flex justify-between items-center mb-4">
                 <h1 className="font-semibold text-lg">Product Data</h1>
                 <div className="relative flex space-x-2 items-center">
@@ -47,6 +84,7 @@ const AdminProduct = () => {
                         {search}
                     </div>
                     <button
+                        onClick={handleAddModal}
                         type="button"
                         className="bg-brown text-white px-4 py-2 rounded hover:saturate-50"
                     >
@@ -54,16 +92,27 @@ const AdminProduct = () => {
                     </button>
                 </div>
             </nav>
-
             <span className="flex gap-5 mb-3 justify-start">
                 {/* Looping tipe select */}
-                {menuTypes.map((type) => renderButton(type))}{" "}
+                {menuTypes.map((type, index) => (
+                    <React.Fragment key={index + 1}>
+                        {renderButton(type)}
+                    </React.Fragment>
+                ))}{" "}
             </span>
 
             <section className="flex justify-start flex-wrap gap-5">
-                {dataFilter.map((item) => (
-                    <CardProduct key={item.id} {...item} />
+                {data.data.map((product, index) => (
+                    <CardProduct
+                        key={index}
+                        {...product}
+                        onClick={() => {
+                            handlePreviewModal();
+                            setSelectedMenu(product);
+                        }}
+                    />
                 ))}
+                <img src={import.meta.env.VITE_DB + ""} alt="" />
             </section>
         </div>
     );

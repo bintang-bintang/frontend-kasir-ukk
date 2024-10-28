@@ -8,6 +8,11 @@ const SidebarKasir = (props) => {
     const location = useLocation(); // Mendapatkan URL path saat ini
     const currentPath = location.pathname; // Mengambil pathname, contoh: '/admin/users'
 
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+    };
+
     return (
         <>
             <div className="bg-black h-screen w-60 fixed -z-10 top-0 left-0 p-4 text-white flex flex-col justify-between">
@@ -42,7 +47,12 @@ const SidebarKasir = (props) => {
                         </li>
                     </Link>
                 </ul>
-                <h2 className="px-6 py-2">Logout</h2>
+                <button
+                    onClick={handleLogout}
+                    className="text-start hover:underline px-6 py-2"
+                >
+                    Logout
+                </button>
             </div>
             <div className="ml-60 py-10 px-8 ">{props.children}</div>
         </>
