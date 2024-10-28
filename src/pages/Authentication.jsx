@@ -47,7 +47,7 @@ const Authentication = () => {
             <div className="bg-gray h-screen ">
                 <div className="flex flex-col h-screen  items-center justify-center gap-4 z-10">
                     <h1 className="text-brown text-lg">
-                        <span className="font-bold">Wikusama</span>Cafe
+                        <span className="font-bold">Wikusama</span>Cafe Git Pull
                     </h1>
                     <div className="flex flex-col gap-4">
                         <h1 className="text-center font-medium text-xl">
