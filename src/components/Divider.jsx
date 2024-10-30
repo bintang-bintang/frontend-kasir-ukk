@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Divider = () => {
+const Divider = (props) => {
   return (
-    <div className="w-auto border-t border-gray my-[1.25em]"></div>
+    <div className={`w-auto border-t border-${props.color} `}></div>
   )
 }
 

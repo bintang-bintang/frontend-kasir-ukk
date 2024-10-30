@@ -6,11 +6,13 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 import Authentication from "./pages/Authentication";
 import AdminApp from "./pages/admin/AdminApp";
 import KasirApp from "./pages/kasir/KasirApp";
+import CobaOrder from "./pages/kasir/CobaOrder";
 
 const App = () => {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path="/coba" element={<CobaOrder />} />
                 <Route path="/login" element={<Authentication />} />
 
                 {/* Rute jika role admin */}
@@ -33,7 +35,7 @@ const App = () => {
                     }
                 />
 
-                {/* <Route path="*" element={<Nopage />} /> */}
+                <Route path="*" element={<Nopage />} />
             </Routes>
         </BrowserRouter>
     );

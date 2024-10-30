@@ -7,9 +7,12 @@ const headers = {
 
 // ==============================CREATE meja==============================
 const createMejaFN = async (data) => {
-    const { data: response } = await axios.post(import.meta.env.VITE_DB + "/meja/add", data);
+    const { data: response } = await axios.post(
+        import.meta.env.VITE_DB + "/meja/add",
+        data
+    );
     return response;
-}
+};
 
 export const useCreateMeja = () => {
     const queryClient = useQueryClient();
@@ -17,44 +20,47 @@ export const useCreateMeja = () => {
         mutationFn: createMejaFN,
         onSuccess: () => {
             queryClient.invalidateQueries("meja");
-        }
+        },
     });
-}
+};
 // ==============================CREATE meja==============================
 
 // ==============================READ mejas==============================
 const getMejasFN = async () => {
     const { data } = await axios.get(import.meta.env.VITE_DB + "/meja");
     return data;
-}
+};
 
 export const useGetMejas = () => {
     return useQuery({
         queryKey: ["meja"],
         queryFn: getMejasFN,
     });
-}
+};
 // ==============================READ meja==============================
 
 // ==============================READ meja==============================
 const getMejaFN = async (id) => {
     const { data } = await axios.get(import.meta.env.VITE_DB + `/meja/${id}`);
     return data;
-}
+};
 
-export const useGetMeja = () => {
+export const useGetMeja = (id) => {
     return useQuery({
-        queryKey: ["meja"],
-        queryFn: getMejaFN,
+        queryKey: ["meja", id],
+        queryFn: () => getMejaFN(id),
     });
-}
+};
 // ==============================READ mejas==============================
 
 // ==============================UPDATE meja==============================
 const updateMejaFN = async (id) => {
-    const { data: response } = await axios.put(import.meta.env.VITE_DB + `/meja/upd/${id}`, data);
+    const { data: response } = await axios.put(
+        import.meta.env.VITE_DB + `/meja/upd/${id}`,
+        data
+    );
     return response;
-}
+};
 
 export const useUpdateMeja = () => {
     const queryClient = useQueryClient();
@@ -62,16 +68,18 @@ export const useUpdateMeja = () => {
         mutationFn: updateMejaFN,
         onSuccess: () => {
             queryClient.invalidateQueries("meja");
-        }
+        },
     });
-}
+};
 // ==============================UPDATE meja==============================
 
 // ==============================DELETE meja==============================
 const deleteMejaFN = async (id) => {
-    const { data: response } = await axios.delete(import.meta.env.VITE_DB + `/meja/del/${id}`);
+    const { data: response } = await axios.delete(
+        import.meta.env.VITE_DB + `/meja/del/${id}`
+    );
     return response;
-}
+};
 
 export const useDeleteMeja = () => {
     const queryClient = useQueryClient();
@@ -79,7 +87,7 @@ export const useDeleteMeja = () => {
         mutationFn: deleteMejaFN,
         onSuccess: () => {
             queryClient.invalidateQueries("meja");
-        }
+        },
     });
-}
+};
 // ==============================DELETE meja==============================

@@ -1,7 +1,24 @@
 import React from "react";
-import { dataHistory } from "../../assets/dataHistory";
+import { useGetTransaksis } from "../../api/TransaksiAPI";
+import { useNavigate } from "react-router-dom";
 
 const KasirHistory = () => {
+    const { data, error, isLoading } = useGetTransaksis();
+    const navigate = useNavigate();
+
+    const handleDetail = (id) => {
+        navigate(`/kasir/transaksi/${id}`);
+    };
+
+    if (isLoading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error.message}</p>;
+    console.log(data);
+
+    // Check if data is an array
+    if (!Array.isArray(data)) {
+        return <p>Data is not available</p>;
+    }
+
     return (
         <div className="w-[60em] gap-1 bg-white2 drop-shadow-md rounded-md">
             <nav className="flex justify-between items-center p-5">
@@ -9,36 +26,41 @@ const KasirHistory = () => {
             </nav>
             <section className="drop-shadow rounded-[4px] flex justify-center font-light">
                 <div className="bg-gray/25 fixed z-10 w-full p-6"></div>
-                <table className="w-[90%] table-auto border-collapse z-20">
+                <table className="w-full table-auto border-collapse z-20">
                     <thead className="text-gray">
                         <tr className="bg-gray-700 text-[#707070]">
                             <th className="p-3 text-start">Tanggal & Waktu</th>
                             <th className="p-3 text-start">Customer</th>
-                            <th className="p-3 text-start">Total</th>
+                            <th className="p-3 text-start">Meja</th>
+                            <th className="p-3 text-start">Status Transaksi</th>
                             <th className="p-3 text-start">Aksi</th>
                         </tr>
                     </thead>
                     <tbody className="gap-5">
-                        {dataHistory.map((history) => (
-                            <tr key={history.id} className=" ">
-                                <td className="p-3 text-start">
-                                    {history.tanggal}
+                        {data.map((history) => (
+                            <tr key={history._id}>
+                                <td className="p-3">
+                                    {new Date(
+                                        history.createdAt
+                                    ).toLocaleString()}
                                 </td>
-                                <td className="p-3 text-start">
-                                    {history.nama_customer}
+                                <td className="p-3">
+                                    {history.nama_pelanggan}
                                 </td>
-                                <td className="p-3 text-start">
-                                    Rp.{history.total_harga}
+                                <td className="p-3">
+                                    {history.id_meja.nama_meja}
                                 </td>
-                                <td className="p-3 text-start flex gap-3">
-                                    <button className="bg-green-500  px-2 py-1 text-white rounded-md">
-                                        See Order
-                                    </button>
-                                    <button className="bg-green-500  px-2 py-1 text-white rounded-md">
-                                        Print
-                                    </button>
-                                    <button className="bg-green-500  px-2 py-1 text-white rounded-md ">
-                                        Bayar
+                                <td className="p-3">
+                                    {history.status_transaksi}
+                                </td>
+                                <td className="p-3">
+                                    <button
+                                        onClick={() => {
+                                            handleDetail(history._id);
+                                        }}
+                                        className="bg-blue-500 text-white px-3 py-1 rounded-md"
+                                    >
+                                        Detail
                                     </button>
                                 </td>
                             </tr>

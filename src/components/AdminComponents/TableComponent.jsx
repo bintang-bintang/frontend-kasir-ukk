@@ -11,12 +11,7 @@ const TableComponent = (props) => {
                     </p>
                     <button
                         type="button"
-                        className="bg-blue-500 text-white2  px-3 py-2 rounded-md hover:bg-blue-700"
-                    >
-                        Update
-                    </button>
-                    <button
-                        type="button"
+                        onClick={props.onClickDelete}
                         className="bg-danger text-white2  px-3 py-2 rounded-md hover:contrast-50"
                     >
                         Delete
@@ -27,12 +22,6 @@ const TableComponent = (props) => {
                     <p className="bg-danger/30 text-danger text-[1em] px-[3rem] py-2 rounded-md">
                         Tidak tersedia
                     </p>
-                    <button
-                        type="button"
-                        className="bg-blue-500/30 text-white2  px-3 py-2 cursor-default rounded-md"
-                    >
-                        Update
-                    </button>
                     <button
                         type="button"
                         className="bg-danger/30 text-white2  px-3 py-2 cursor-default rounded-md"

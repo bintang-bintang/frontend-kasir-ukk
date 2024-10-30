@@ -7,7 +7,7 @@ const CardProduct = (props) => {
     return (
         <div
             onClick={props.onClick}
-            className="bg-white2  w-[18.5em] h-fit drop-shadow-xl rounded-md overflow-hidden group cursor-pointer"
+            className="bg-white2  w-[12.5em] h-fit drop-shadow-xl rounded-md overflow-hidden group cursor-pointer"
         >
             <div className="w-fit p-2 h-[166.5px] overflow-hidden flex justify-center transition-all duration-[250ms] ease-in-out">
                 <h1 className="z-10 text-xl transition-all duration-[250ms] ease-in-out text-white self-center absolute opacity-0 group-hover:opacity-100 italic text-[12px]">

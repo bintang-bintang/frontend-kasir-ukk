@@ -12,6 +12,9 @@ const Authentication = () => {
     });
     const navigate = useNavigate();
 
+    const handleChange = (e) => {
+        setInputUser({ ...inputUser, [e.target.name]: e.target.value });
+    };
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -20,9 +23,6 @@ const Authentication = () => {
             navigate("/" + decoded.role);
         }
     }, [navigate]);
-    const handleChange = (e) => {
-        setInputUser({ ...inputUser, [e.target.name]: e.target.value });
-    };
 
     const loginPH = useUserLogin();
 
@@ -40,6 +40,21 @@ const Authentication = () => {
                 setErrorLogin(error.response.data.message);
             },
         });
+    };
+
+    const handleLoginAdmin = () => {
+        setInputUser({
+            email: "admin@gmail.com",
+            password: "admin",
+        });
+        handleLogin();
+    };
+    const handleLoginKasir = () => {
+        setInputUser({
+            email: "kasir1@gmail.com",
+            password: "kasir1",
+        });
+        handleLogin();
     };
 
     return (
@@ -74,6 +89,20 @@ const Authentication = () => {
                                 value="Login"
                                 className="bg-brown rounded-md py-2 cursor-pointer hover:bg-brown/85 transition-all"
                             />
+                            <div className="flex justify-between">
+                                <input
+                                    onClick={handleLoginAdmin}
+                                    type="button"
+                                    value="Login as Admin"
+                                    className="w-[48%] bg-brown rounded-md py-2 cursor-pointer hover:bg-brown/85 transition-all"
+                                />
+                                <input
+                                    onClick={handleLoginKasir}
+                                    type="button"
+                                    value="Login as Kasir"
+                                    className="w-[48%] bg-brown rounded-md py-2 cursor-pointer hover:bg-brown/85 transition-all"
+                                />
+                            </div>
                         </form>
                         <h1>{errorLogin}</h1>
                     </div>
