@@ -71,3 +71,19 @@ export const useBayarTransaksi = () => {
     });
 };
 // ======================UPDATE TRANSAKSI======================
+
+// ======================GET PDF TRANSAKSI======================
+const getPDFTransaksiFN = async (id) => {
+    const response = await axios.get(
+        `${import.meta.env.VITE_DB}/transaksi/pdf/${id}`,
+        { responseType: "blob" }
+    );
+    return response.data;
+};
+
+export const useGetPDFTransaksi = () => {
+    return useMutation({
+        mutationFn: getPDFTransaksiFN,
+    });
+};
+// ======================GET PDF TRANSAKSI======================

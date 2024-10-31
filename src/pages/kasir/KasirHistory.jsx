@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetTransaksis } from "../../api/TransaksiAPI";
+import { useBayarTransaksi, useGetTransaksis } from "../../api/TransaksiAPI";
 import { useNavigate } from "react-router-dom";
 
 const KasirHistory = () => {
@@ -9,7 +9,21 @@ const KasirHistory = () => {
     const handleDetail = (id) => {
         navigate(`/kasir/detailtransaksi/${id}`);
     };
-
+    const PHbayartransaksi = useBayarTransaksi();
+    const handleBayar = (id) => {
+        // id.preventDefault();
+        PHbayartransaksi.mutate(id, {
+            onSuccess: (data) => {
+                console.log(data);
+                setError(null);
+                navigate("/kasir/history");
+            },
+            onError: (error) => {
+                setError(error);
+                console.log(error);
+            },
+        });
+    };
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
     console.log(data);
@@ -53,7 +67,26 @@ const KasirHistory = () => {
                                 <td className="p-3">
                                     {history.status_transaksi}
                                 </td>
-                                <td className="p-3">
+                                <td className="p-3 flex gap-5">
+                                    {history.status_transaksi === "lunas" ? (
+                                        <>
+                                            <button className="bg-netral cursor-default  text-white px-3 py-1 rounded-md">
+                                                Bayar
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <button
+                                                onClick={() => {
+                                                    handleBayar(history._id);
+                                                }}
+                                                className="bg-blue-500 text-white px-3 py-1 rounded-md"
+                                            >
+                                                Bayar
+                                            </button>
+                                        </>
+                                    )}
+
                                     <button
                                         onClick={() => {
                                             handleDetail(history._id);

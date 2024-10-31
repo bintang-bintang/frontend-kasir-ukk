@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { useBayarTransaksi, useGetTransaksi } from "../../api/TransaksiAPI";
+import { useBayarTransaksi, useGetTransaksi, useGetPDFTransaksi } from "../../api/TransaksiAPI";
 import { useGETdetailMenu } from "../../api/DetailmenuAPI";
 
 const KasirDetailTransaksi = () => {
@@ -21,6 +21,7 @@ const KasirDetailTransaksi = () => {
     } = useGETdetailMenu(transaksi?._id);
 
     const PHbayartransaksi = useBayarTransaksi();
+
     const handleBayar = (e) => {
         e.preventDefault();
         PHbayartransaksi.mutate(transaksi?._id, {
@@ -28,6 +29,26 @@ const KasirDetailTransaksi = () => {
                 console.log(data);
                 setError(null);
                 navigate("/kasir/history");
+            },
+            onError: (error) => {
+                setError(error);
+                console.log(error);
+            },
+        });
+    };
+
+    const PHgetPDFTransaksi = useGetPDFTransaksi();
+    const handlePrintTransaksi = (e) => {
+        e.preventDefault();
+        PHgetPDFTransaksi.mutate(transaksi?._id, {
+            onSuccess: (data) => {
+                const url = window.URL.createObjectURL(new Blob([data]));
+                const link = document.createElement("a");
+                link.href = url;
+                link.setAttribute("download", `transaksi_${transaksi._id}.pdf`);
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
             },
             onError: (error) => {
                 setError(error);
@@ -151,11 +172,21 @@ const KasirDetailTransaksi = () => {
                             ))}
                         </tbody>
                     </table>
-                    <h2 className="font-bold mt-5 text-[20px]">Total: {total}</h2>
+                    <h2 className="font-bold mt-5 text-[20px]">
+                        Total: {total}
+                    </h2>
                 </div>
                 <div className="flex text-white2 justify-evenly">
                     {transaksi.status_transaksi === "lunas" ? (
-                        <div className=""></div>
+                        <div className="">
+                            <button
+                                type="button"
+                                onClick={handlePrintTransaksi}
+                                className="px-32 hover:contrast-50 py-2 bg-none text-orange outline outline-1 rounded-md"
+                            >
+                                Print
+                            </button>
+                        </div>
                     ) : (
                         <div className="flex gap-5 px-3 py-2 rounded-md text-white2 ">
                             <button
