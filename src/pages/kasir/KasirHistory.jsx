@@ -7,7 +7,7 @@ const KasirHistory = () => {
     const navigate = useNavigate();
 
     const handleDetail = (id) => {
-        navigate(`/kasir/transaksi/${id}`);
+        navigate(`/kasir/detailtransaksi/${id}`);
     };
 
     if (isLoading) return <p>Loading...</p>;

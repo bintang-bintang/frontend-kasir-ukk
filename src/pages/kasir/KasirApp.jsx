@@ -7,6 +7,7 @@ import KasirOrder from "./KasirOrder";
 import KasirHistory from "./KasirHistory";
 import KasirHome from "./KasirHome";
 import KasirTransaksi from "./KasirTransaksi";
+import KasirDetailTransaksi from "./KasirDetailTransaksi";
 
 const KasirApp = () => {
     return (
@@ -16,8 +17,13 @@ const KasirApp = () => {
                 <SidebarKasir>
                     <Routes>
                         <Route path="/" element={<KasirHome />} />
+
+
                         <Route path="/orders" element={<KasirOrder />} />
                         <Route path="transaksi/:id" element={<KasirTransaksi />} />
+                        <Route path="detailtransaksi/:id" element={<KasirDetailTransaksi />} />
+
+
                         <Route path="/history" element={<KasirHistory />} />
                     </Routes>
                 </SidebarKasir>

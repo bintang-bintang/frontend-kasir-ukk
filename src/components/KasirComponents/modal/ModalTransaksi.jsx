@@ -33,7 +33,7 @@ const ModalTransaksi = (props) => {
                 localStorage.setItem("nama_pelanggan", dataTra.data.nama_pelanggan);
 
                 props.click();
-                navigate(`/kasir/transaksi/${dataTra.data._id}`);
+                navigate(`/kasir/detailtransaksi/${dataTra.data._id}`);
             },
             onError: (error) => {
                 console.log(error);
