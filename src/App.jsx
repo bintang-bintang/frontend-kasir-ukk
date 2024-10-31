@@ -4,9 +4,12 @@ import Nopage from "./pages/Nopage";
 import ProtectedRoute from "./pages/ProtectedRoute";
 
 import Authentication from "./pages/Authentication";
+import CobaOrder from "./pages/kasir/CobaOrder";
+
 import AdminApp from "./pages/admin/AdminApp";
 import KasirApp from "./pages/kasir/KasirApp";
-import CobaOrder from "./pages/kasir/CobaOrder";
+import ManagerApp from "./pages/manager/ManagerApp";
+
 
 const App = () => {
     return (
@@ -31,6 +34,15 @@ const App = () => {
                     element={
                         <ProtectedRoute allowedRoles={['kasir']}>
                             <KasirApp />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/manager/*"
+                    element={
+                        <ProtectedRoute allowedRoles={['manager']}>
+                            <ManagerApp />
                         </ProtectedRoute>
                     }
                 />

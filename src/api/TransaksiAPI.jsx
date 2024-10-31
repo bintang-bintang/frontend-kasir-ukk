@@ -52,3 +52,22 @@ export const useCreateTransaksi = () => {
     });
 };
 // Create TransaksiAPI ========================================================================
+
+// ======================UPDATE TRANSAKSI======================
+const bayarTransaksiFN = async (id) => {
+    const response = await axios.put(
+        `${import.meta.env.VITE_DB}/transaksi/bayar/${id}`
+    );
+    return response.data;
+};
+
+export const useBayarTransaksi = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: bayarTransaksiFN,
+        onSuccess: () => {
+            queryClient.invalidateQueries("transaksi");
+        },
+    });
+};
+// ======================UPDATE TRANSAKSI======================

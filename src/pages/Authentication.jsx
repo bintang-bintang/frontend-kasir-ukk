@@ -56,6 +56,13 @@ const Authentication = () => {
         });
         handleLogin();
     };
+    const handleLoginManager= () => {
+        setInputUser({
+            email: "manager1@gmail.com",
+            password: "manager1",
+        });
+        handleLogin();
+    };
 
     return (
         <>
@@ -100,6 +107,12 @@ const Authentication = () => {
                                     onClick={handleLoginKasir}
                                     type="button"
                                     value="Login as Kasir"
+                                    className="w-[48%] bg-brown rounded-md py-2 cursor-pointer hover:bg-brown/85 transition-all"
+                                />
+                                <input
+                                    onClick={handleLoginManager}
+                                    type="button"
+                                    value="Login as Manager"
                                     className="w-[48%] bg-brown rounded-md py-2 cursor-pointer hover:bg-brown/85 transition-all"
                                 />
                             </div>
